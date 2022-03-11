@@ -3,7 +3,7 @@ let weight = 0.1
 let lr = 0.01
 
 production = (input, weight) => {
-    return input * weight
+  return input * weight
 }
 
 // 2) PREDICT: Making A Prediction And Evaluating Error
@@ -14,5 +14,3 @@ let true_ = win_or_lose_binary[0]
 let pred = production(input, weight)
 let error = (pred - true_) ** 2
 console.log(error)
-
-

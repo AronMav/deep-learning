@@ -1,9 +1,9 @@
 var nj = require('numjs');
 
-let weights = nj.array([0.1, 0.2, 0]) 
+let weights = nj.array([0.1, 0.2, 0])
 
-pred = (input, weights) =>{
-    return input.dot(weights).get(0)
+pred = (input, weights) => {
+  return input.dot(weights).get(0)
 }
 
 toes = nj.array([8.5, 9.5, 9.9, 9.0])

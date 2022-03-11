@@ -2,18 +2,18 @@ var assert = require('assert');
 
 weights = [0.1, 0.2, 0]
 
-pred = (input, weights) =>{
-    return w_sum(input, weights)
+pred = (input, weights) => {
+  return w_sum(input, weights)
 }
 
-w_sum = (a, b) =>{
-    assert.equal(a.length, b.length)
+w_sum = (a, b) => {
+  assert.equal(a.length, b.length)
 
-    output = 0 
-    for (let index = 0; index < a.length; index++) {
-        output += (a[index] * b[index])
-    }
-    return Math.round(output*100)/100
+  output = 0
+  for (let index = 0; index < a.length; index++) {
+    output += (a[index] * b[index])
+  }
+  return Math.round(output * 100) / 100
 }
 
 toes = [8.5, 9.5, 9.9, 9.0]

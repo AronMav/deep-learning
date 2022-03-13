@@ -32,5 +32,6 @@ for (let iteration = 0; iteration < 40; iteration++) {
     weights = weights.subtract(input.multiply(delta).multiply(alpha))
     console.log("Prediction:" + String(prediction))
   }
-  console.log("Error:" + String(errorForAllLights) + "\n")
+  console.log("Error:" + String(errorForAllLights))
+  console.log("Weights:" + String(weights) + "\n")
 }

@@ -14,8 +14,8 @@ streetLights = nj.stack([
 
 walkVsStop = nj.array([0, 1, 0, 1, 1, 0])
 
-input = streetLights.pick(0) //[0, 1, 0]
-goalPrediction = walkVsStop.pick(0) //Include 0 (stop)
+input = streetLights.pick(0) // [1, 0, 1]
+goalPrediction = walkVsStop.pick(0) // Include 0 (stop)
 
 for (let iteration = 0; iteration < 40; iteration++) {
   let errorForAllLights = 0;

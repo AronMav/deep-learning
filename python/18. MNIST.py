@@ -4,7 +4,8 @@ from keras.datasets import mnist
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-images, labels = (x_train[0:1000].reshape(1000, 28 * 28) / 255, y_train[0:1000])
+images, labels = (x_train[0:1000].reshape(
+    1000, 28 * 28) / 255, y_train[0:1000])
 
 one_hot_labels = np.zeros((len(labels), 10))
 for i, l in enumerate(labels):
@@ -31,24 +32,24 @@ for j in range(iterations):
     error, correct_accuracy = (0.0, 0)
 
     for i in range(len(images)):
-        layer_0 = images[i:i + 1]    
+        layer_0 = images[i:i + 1]
         layer_1 = relu(np.dot(layer_0, weights_0_1))
-        
+
         dropout_mask = np.random.randint(2, size=layer_1.shape)
         layer_1 *= dropout_mask * 2
-        
+
         layer_2 = np.dot(layer_1, weights_1_2)
 
         error += np.sum((labels[i:i + 1] - layer_2) ** 2)
         correct_accuracy += int(np.argmax(layer_2) ==
-                           np.argmax(labels[i:i + 1]))
+                                np.argmax(labels[i:i + 1]))
 
         layer_2_delta = (labels[i:i+1] - layer_2)
         layer_1_delta = layer_2_delta.dot(weights_1_2.T)\
             * relu2deriv(layer_1)
-           
-        layer_1_delta *= dropout_mask 
-            
+
+        layer_1_delta *= dropout_mask
+
         weights_1_2 += alpha * layer_1.T.dot(layer_2_delta)
         weights_0_1 += alpha * layer_0.T.dot(layer_1_delta)
 
@@ -62,11 +63,11 @@ if(j % 10 == 0 or j == iterations-1):
     for i in range(len(test_images)):
 
         layer_0 = test_images[i:i+1]
-        layer_1 = relu(np.dot(layer_0,weights_0_1))
-        layer_2 = np.dot(layer_1,weights_1_2)
+        layer_1 = relu(np.dot(layer_0, weights_0_1))
+        layer_2 = np.dot(layer_1, weights_1_2)
 
         error += np.sum((test_labels[i:i+1] - layer_2) ** 2)
-        correct_accuracy += int(np.argmax(layer_2) == \
-                                        np.argmax(test_labels[i:i+1]))
-    sys.stdout.write("\n\n Test-Err:" + str(error/float(len(test_images)))[0:5] +\
+        correct_accuracy += int(np.argmax(layer_2) ==
+                                np.argmax(test_labels[i:i+1]))
+    sys.stdout.write("\n\n Test-Err:" + str(error/float(len(test_images)))[0:5] +
                      " Test-Acc:" + str(correct_accuracy/float(len(test_images))))

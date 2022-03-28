@@ -2,6 +2,7 @@ import numpy as np
 
 np.random.seed(1)
 
+
 def relu(x):
     return (x > 0) * x  # returns x if x > 0
     # return 0 otherwise

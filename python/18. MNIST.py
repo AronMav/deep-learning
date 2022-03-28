@@ -31,8 +31,12 @@ for j in range(iterations):
     error, correct_accuracy = (0.0, 0)
 
     for i in range(len(images)):
-        layer_0 = images[i:i + 1]
+        layer_0 = images[i:i + 1]    
         layer_1 = relu(np.dot(layer_0, weights_0_1))
+        
+        dropout_mask = np.random.randint(2, size=layer_1.shape)
+        layer_1 *= dropout_mask * 2
+        
         layer_2 = np.dot(layer_1, weights_1_2)
 
         error += np.sum((labels[i:i + 1] - layer_2) ** 2)
@@ -42,6 +46,9 @@ for j in range(iterations):
         layer_2_delta = (labels[i:i+1] - layer_2)
         layer_1_delta = layer_2_delta.dot(weights_1_2.T)\
             * relu2deriv(layer_1)
+           
+        layer_1_delta *= dropout_mask 
+            
         weights_1_2 += alpha * layer_1.T.dot(layer_2_delta)
         weights_0_1 += alpha * layer_0.T.dot(layer_1_delta)
 

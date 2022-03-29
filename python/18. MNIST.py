@@ -45,11 +45,13 @@ for j in range(iterations):
 
         error += np.sum((labels[batch_start:batch_end] - layer_2) ** 2)
         for k in range(batch_size):
-            correct_accuracy += int(np.argmax(layer_2[k:k+1]) ==
-                                    np.argmax(labels[batch_start+k:batch_start+k+1]))
+            correct_accuracy += int(np.argmax(layer_2[k:k+1]) == np.argmax(
+                labels[batch_start+k:batch_start+k+1]))
 
-            layer_2_delta = (labels[batch_start:batch_end]-layer_2)/batch_size
-            layer_1_delta = layer_2_delta.dot(weights_1_2.T)* relu2deriv(layer_1)
+            layer_2_delta = (
+                labels[batch_start:batch_end] - layer_2) / batch_size
+            layer_1_delta = layer_2_delta.dot(
+                weights_1_2.T)*relu2deriv(layer_1)
             layer_1_delta *= dropout_mask
 
             weights_1_2 += alpha * layer_1.T.dot(layer_2_delta)
@@ -59,7 +61,7 @@ for j in range(iterations):
                      " Train-Err:" + str(error / float(len(images)))[0:5] +
                      " Train-Acc:" + str(correct_accuracy / float(len(images))))
 
-if(j % 10 == 0 or j == iterations-1):
+if(j % 10 == 0 or j == iterations - 1):
     error, correct_accuracy = (0.0, 0)
 
     for i in range(len(test_images)):

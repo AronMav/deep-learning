@@ -49,8 +49,7 @@ for j in range(iterations):
                 labels[batch_start+k:batch_start+k+1]))
 
             layer_2_delta = (labels[batch_start:batch_end] - layer_2) / batch_size
-            layer_1_delta = layer_2_delta.dot(
-                weights_1_2.T)*relu2deriv(layer_1)
+            layer_1_delta = layer_2_delta.dot(weights_1_2.T)*relu2deriv(layer_1)
             layer_1_delta *= dropout_mask
 
             weights_1_2 += alpha * layer_1.T.dot(layer_2_delta)
